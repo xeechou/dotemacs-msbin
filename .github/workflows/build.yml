@@ -37,6 +37,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # pull
           asset_path: _out/dotemacs-msbin.zip
           asset_name: dotemacs-msbin.zip

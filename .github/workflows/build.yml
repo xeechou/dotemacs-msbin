@@ -1,9 +1,9 @@
 name: Emacs binaries build
 
-on:
+on: [push]
   push:
-    tags:
-      - 'v*'
+    # tags:
+    #   - 'v*'
 
 jobs:
   build:
@@ -28,6 +28,11 @@ jobs:
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
       - name: upload windows artifacts
         uses: actions/upload-release-asset@v1
         env:

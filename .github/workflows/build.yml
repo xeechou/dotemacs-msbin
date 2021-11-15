@@ -1,7 +1,7 @@
 name: Emacs binaries build
 
 on: [push]
-  push:
+  # push:
     # tags:
     #   - 'v*'
 

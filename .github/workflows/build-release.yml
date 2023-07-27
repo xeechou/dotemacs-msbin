@@ -27,6 +27,7 @@ jobs:
           pacman -S --noconfirm mingw-w64-x86_64-curl
           pacman -S --noconfirm mingw-w64-x86_64-ninja
           pacman -S --noconfirm mingw-w64-x86_64-sqlite3
+          echo "Tag name from github.ref_name ${{  github.ref_name }}"
           makepkg-mingw -f -s
       - name: Create Release
         id: create_release
@@ -44,6 +45,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # pull
-          asset_path: dotemacs-bin-0.1.2-2-any.pkg.tar.zst
-          asset_name: dotemacs-bin-0.1.2-2-any.pkg.tar.zst
+          asset_path: dotemacs-bin-${{  github.ref_name }}-any.pkg.tar.zst
+          asset_name: dotemacs-bin-${{  github.ref_name }}-any.pkg.tar.zst
           asset_content_type: application/x-tar

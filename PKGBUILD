@@ -3,8 +3,8 @@
 _realname=dotemacs-bin
 pkgbase=mingw-w64-${_realname}
 pkgname=("${_realname}")
-pkgver=0.1.2
-pkgrel=2
+pkgver=v0.1.3
+pkgrel=1
 pkgdesc="Binaries dependencies for Emacs on Windows"
 arch=('any')
 mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32' 'clangarm64')
@@ -17,9 +17,10 @@ depends=("${MINGW_PACKAGE_PREFIX}-hunspell"
          "${MINGW_PACKAGE_PREFIX}-ninja"
          "${MINGW_PACKAGE_PREFIX}-curl")
 makedepends=("wget" "pacman-contrib" "curl" "git")
-source=("001-en_US.patch" "dict.sh")
-sha256sums=('SKIP' 'SKIP')
-dictref="9ec31e4"
+source=("dict.sh")
+sha256sums=('SKIP')
+# dictref="9ec31e4"
+dictref="libreoffice-7.6.0.2"
 
 pkg_download() {
     mkdir -p "$2"
@@ -53,8 +54,8 @@ build() {
     # # clone dictionaries because mingw only has en dictionaries
     cd "${srcdir}"
     rm -rf dict #clearing out the dictionary
-    git clone git://anongit.freedesktop.org/libreoffice/dictionaries dict
-    cd dict && git checkout ${dictref} && patch -p1 < ../001-en_US.patch
+    git clone -b ${dictref} git://anongit.freedesktop.org/libreoffice/dictionaries dict
+    # cd dict && git checkout ${dictref} && patch -p1 < ../001-en_US.patch
     cd "${srcdir}" # now copy the dictionaries
     ./dict.sh dict "${srcdir}/unpack/$(basename ${MINGW_PREFIX})/share/hunspell"
 }

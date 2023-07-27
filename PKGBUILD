@@ -18,8 +18,7 @@ depends=("${MINGW_PACKAGE_PREFIX}-hunspell"
          "${MINGW_PACKAGE_PREFIX}-curl")
 makedepends=("wget" "pacman-contrib" "curl" "git")
 source=("001-en_US.patch" "dict.sh")
-sha256sums=('SKIP'
-	    'SKIP')
+sha256sums=('SKIP' 'SKIP')
 dictref="9ec31e4"
 
 pkg_download() {

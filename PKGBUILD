@@ -42,7 +42,6 @@ prepare() {
     for url in ${packages}; do
 	pkg_download "$url" "${srcdir}/cache"
     done
-
 }
 
 build() {

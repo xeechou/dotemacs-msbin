@@ -24,6 +24,7 @@ jobs:
           pacman -S --noconfirm mingw-w64-x86_64-curl
           pacman -S --noconfirm mingw-w64-x86_64-ninja
           pacman -S --noconfirm mingw-w64-x86_64-sqlite3
+          git config --system core.autocrlf input
           makepkg-mingw -f -s
       # - name: Create Release
       #   id: create_release

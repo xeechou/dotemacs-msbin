@@ -17,8 +17,8 @@ depends=("${MINGW_PACKAGE_PREFIX}-hunspell"
          "${MINGW_PACKAGE_PREFIX}-ninja"
          "${MINGW_PACKAGE_PREFIX}-curl")
 makedepends=("wget" "pacman-contrib" "curl" "git")
-source=("dict.sh")
-sha256sums=('SKIP')
+source=("dict.sh" "dict.txt")
+sha256sums=('SKIP' 'SKIP')
 # dictref="9ec31e4"
 dictref="libreoffice-7.6.0.2"
 

@@ -1,6 +1,6 @@
 # make files
 src/
 pkg/
-
+test/
 # artifacts
 *.zst

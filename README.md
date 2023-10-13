@@ -1,4 +1,4 @@
-# Emacs binaries management for Windows v0.1.2
+# Emacs binaries management for Windows v0.2.0
 
 The project originates from gromnitsky's
 [hunspell-windows](https://github.com/gromnitsky/hunspell-windows). Later I
@@ -10,6 +10,7 @@ Right now it includes:
 - SQLite;
 - ninja-build;
 - curl;
+- coreutils;
 
 The binaries are downloaded from the MSYS2 mirrors; the libreoffice dicts are
 renamed to match `language_territory` locale names, like `uk_UA` or `en_GB`.
@@ -25,10 +26,13 @@ The easiest way to run it under Windows is to download MSYS2, run
 $ pacman -S git patch curl base-devel
 $ git clone ...
 $ cd dotemacs-msbin
-$ makepkg-mingw
+$ makepkg -s
 ~~~
 
 The resulting .tar.zst (~100MB) should be in current directory
+
+### On Starting Emacs Server
+I use this [script](./StartEmacs.bat) to start the Emacs server, it boils down to `emacsclientw.exe -n -c -a ""` to start a server, then later you can use `emacsclientw.exe -create-frame` to start a frame.
 
 ## Result artifacts
 

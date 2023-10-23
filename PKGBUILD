@@ -3,7 +3,7 @@
 _realname=dotemacs-bin
 pkgbase=mingw-w64-${_realname}
 pkgname=("${_realname}")
-pkgver=v0.2.1
+pkgver=v0.2.2
 pkgrel=1
 pkgdesc="Binaries dependencies for Emacs on Windows"
 arch=('any')
@@ -17,7 +17,8 @@ depends=("${MINGW_PACKAGE_PREFIX}-hunspell"
          "${MINGW_PACKAGE_PREFIX}-ninja"
          "${MINGW_PACKAGE_PREFIX}-curl"
 	 "${MINGW_PACKAGE_PREFIX}-diffutils"
-	 "coreutils"
+	 "coreutils" #for printf
+	 "${MINGW_PACKAGE_PREFIX}-binutils"  #for objdump, nm, c++filt
 	 # "${MINGW_PACKAGE_PREFIX}-texlive-bin" too much more bloated
 	 # "${MINGW_PACKAGE_PREFIX}-texlive-plain-generic"
 	 # "${MINGW_PACKAGE_PREFIX}-texlive-latex-recommended"

@@ -11,9 +11,16 @@ Right now it includes:
 - ninja-build;
 - curl;
 - coreutils;
+- diffuitls;
+- binutils;
 
 The binaries are downloaded from the MSYS2 mirrors; the libreoffice dicts are
 renamed to match `language_territory` locale names, like `uk_UA` or `en_GB`.
+
+## Softwares that you should install on Windows directly
+- [Git Windows](https://git-scm.com/download/win)
+- [Imagemagick](https://imagemagick.org/) for `org-download-clipboard` to work
+- [MikTek](https://miktex.org/) for `org-latex-preview`
 
 ## Usage
 

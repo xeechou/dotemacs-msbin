@@ -54,7 +54,8 @@ prepare() {
 build() {
     cd "${srcdir}/"
     mkdir -p unpack
-    for f in cache/*.tar.zst; do
+    # tar accepts "axf" option now which use whatever the decompressor requires
+    for f in cache/*.tar.*; do
 	tar -axf "$f" -C "${srcdir}/unpack"
     done
 

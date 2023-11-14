@@ -10,12 +10,16 @@ set no_proxy=localhost,127.0.0.1,192.168.1.1
 
 
 set PATH=D:\Softwares\Emacs\emacs-29.1\bin;D:\Softwares\DotEmacs\mingw64\bin;D:\Softwares\DotEmacs\usr\bin;
-set PATH=%PATH%D:\Softwares\Git\mingw64\bin;D:\Softwares\LLVM\bin;D:\Softwares\CMake\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\OpenSSH\
+
+set PATH=%PATH%D:\Softwares\Git\mingw64\bin;D:\Softwares\LLVM\bin;D:\Softwares\CMake\bin;
+set PATH=%PATH%D:\Softwares\ImageMagick-7.1.1-Q16-HDRI;
+rem set windows path
+set PATH=%PATH%C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\OpenSSH;C:\Windows\System32\WindowsPowerShell\v1.0
 set MANPATH=D:\Softwares\DotEmacs\mingw64\share\man;D:\Softwares\DotEmacs\usr\share\man
 
 rem set SSH_ASKPASS so git-ssh will work
 set SSH_ASKPASS=D:\Softwares\Git\mingw64\libexec\git-core\git-gui--askpass
-set GIT_PATH=D:\Softwares\Git\usr\bin
+set GIT_BINPATH=D:\Softwares\Git\usr\bin
 
 del /q %HOME%\.emacs.d\server\*
 rem start emacs server, using emacsclientw.exe -create-frame to start new client

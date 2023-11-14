@@ -3,7 +3,7 @@
 _realname=dotemacs-bin
 pkgbase=mingw-w64-${_realname}
 pkgname=("${_realname}")
-pkgver=v0.2.0
+pkgver=v0.2.2
 pkgrel=1
 pkgdesc="Binaries dependencies for Emacs on Windows"
 arch=('any')
@@ -16,10 +16,12 @@ depends=("${MINGW_PACKAGE_PREFIX}-hunspell"
          "${MINGW_PACKAGE_PREFIX}-sqlite3"
          "${MINGW_PACKAGE_PREFIX}-ninja"
          "${MINGW_PACKAGE_PREFIX}-curl"
-	 "coreutils"
-	 # "${MINGW_PACKAGE_PREFIX}-texlive-bin" too much more bloated
-	 # "${MINGW_PACKAGE_PREFIX}-texlive-plain-generic"
-	 # "${MINGW_PACKAGE_PREFIX}-texlive-latex-recommended"
+	       "${MINGW_PACKAGE_PREFIX}-diffutils"
+	       "coreutils" #for printf
+	       "${MINGW_PACKAGE_PREFIX}-binutils"  #for objdump, nm, c++filt
+	       # "${MINGW_PACKAGE_PREFIX}-texlive-bin" too much more bloated
+	       # "${MINGW_PACKAGE_PREFIX}-texlive-plain-generic"
+	       # "${MINGW_PACKAGE_PREFIX}-texlive-latex-recommended"
 	)
 makedepends=("wget" "pacman-contrib" "curl" "git")
 source=("dict.sh" "dict.txt")
@@ -52,7 +54,8 @@ prepare() {
 build() {
     cd "${srcdir}/"
     mkdir -p unpack
-    for f in cache/*.tar.zst; do
+    # tar accepts "axf" option now which use whatever the decompressor requires
+    for f in cache/*.tar.*; do
 	tar -axf "$f" -C "${srcdir}/unpack"
     done
 

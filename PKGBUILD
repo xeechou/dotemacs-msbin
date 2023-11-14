@@ -16,12 +16,12 @@ depends=("${MINGW_PACKAGE_PREFIX}-hunspell"
          "${MINGW_PACKAGE_PREFIX}-sqlite3"
          "${MINGW_PACKAGE_PREFIX}-ninja"
          "${MINGW_PACKAGE_PREFIX}-curl"
-	 "${MINGW_PACKAGE_PREFIX}-diffutils"
-	 "coreutils" #for printf
-	 "${MINGW_PACKAGE_PREFIX}-binutils"  #for objdump, nm, c++filt
-	 # "${MINGW_PACKAGE_PREFIX}-texlive-bin" too much more bloated
-	 # "${MINGW_PACKAGE_PREFIX}-texlive-plain-generic"
-	 # "${MINGW_PACKAGE_PREFIX}-texlive-latex-recommended"
+	       "${MINGW_PACKAGE_PREFIX}-diffutils"
+	       "coreutils" #for printf
+	       "${MINGW_PACKAGE_PREFIX}-binutils"  #for objdump, nm, c++filt
+	       # "${MINGW_PACKAGE_PREFIX}-texlive-bin" too much more bloated
+	       # "${MINGW_PACKAGE_PREFIX}-texlive-plain-generic"
+	       # "${MINGW_PACKAGE_PREFIX}-texlive-latex-recommended"
 	)
 makedepends=("wget" "pacman-contrib" "curl" "git")
 source=("dict.sh" "dict.txt")

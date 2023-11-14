@@ -10,6 +10,7 @@ set no_proxy=localhost,127.0.0.1,192.168.1.1
 
 
 set PATH=D:\Softwares\Emacs\emacs-29.1\bin;D:\Softwares\DotEmacs\mingw64\bin;D:\Softwares\DotEmacs\usr\bin;
+
 set PATH=%PATH%D:\Softwares\Git\mingw64\bin;D:\Softwares\LLVM\bin;D:\Softwares\CMake\bin;
 set PATH=%PATH%D:\Softwares\ImageMagick-7.1.1-Q16-HDRI;
 rem set windows path

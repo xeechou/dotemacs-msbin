@@ -14,6 +14,7 @@ Right now it includes:
 - diffuitls;
 - binutils;
 
+
 The binaries are downloaded from the MSYS2 mirrors; the libreoffice dicts are
 renamed to match `language_territory` locale names, like `uk_UA` or `en_GB`.
 

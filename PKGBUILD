@@ -4,7 +4,7 @@ _realname=dotemacs-bin
 pkgbase=mingw-w64-${_realname}
 pkgname=("${_realname}")
 pkgver=v0.2.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Binaries dependencies for Emacs on Windows"
 arch=('any')
 mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32' 'clangarm64')
@@ -16,13 +16,13 @@ depends=("${MINGW_PACKAGE_PREFIX}-hunspell"
          "${MINGW_PACKAGE_PREFIX}-sqlite3"
          "${MINGW_PACKAGE_PREFIX}-ninja"
          "${MINGW_PACKAGE_PREFIX}-curl"
-	       "${MINGW_PACKAGE_PREFIX}-diffutils"
-	       "coreutils" #for printf
-	       "${MINGW_PACKAGE_PREFIX}-binutils"  #for objdump, nm, c++filt
-	       # "${MINGW_PACKAGE_PREFIX}-texlive-bin" too much more bloated
-	       # "${MINGW_PACKAGE_PREFIX}-texlive-plain-generic"
-	       # "${MINGW_PACKAGE_PREFIX}-texlive-latex-recommended"
-	)
+         "${MINGW_PACKAGE_PREFIX}-diffutils"
+         "coreutils" #for printf
+         "${MINGW_PACKAGE_PREFIX}-binutils"  #for objdump, nm, c++filt
+         # "${MINGW_PACKAGE_PREFIX}-texlive-bin" too much more bloated
+         # "${MINGW_PACKAGE_PREFIX}-texlive-plain-generic"
+         # "${MINGW_PACKAGE_PREFIX}-texlive-latex-recommended"
+        )
 makedepends=("wget" "pacman-contrib" "curl" "git")
 source=("dict.sh" "dict.txt")
 sha256sums=('SKIP' 'SKIP')

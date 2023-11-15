@@ -4,7 +4,7 @@ _realname=dotemacs-bin
 pkgbase=mingw-w64-${_realname}
 pkgname=("${_realname}")
 pkgver=v0.2.2
-pkgrel=2
+pkgrel=3
 pkgdesc="Binaries dependencies for Emacs on Windows"
 arch=('any')
 mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32' 'clangarm64')
@@ -41,13 +41,15 @@ prepare() {
     # get the dependencies: "xargs -n 1" will execute the command once per
     # parameter, "pacman -Sp" will generate the default URL to download
     echo "${depends[@]}" | xargs -n 1 pactree -u | \
-	sort -u | \
-	xargs -n 1 pacman -Sp > _packages.list
+        sort -u | \
+        xargs -n 1 pacman -Sp > _packages.list
+    echo "Prepare: packages to download:"
+    cat _packages.list
 
     # Download packages under the cache
     packages=$(cat _packages.list)
     for url in ${packages}; do
-	pkg_download "$url" "${srcdir}/cache"
+        pkg_download "$url" "${srcdir}/cache"
     done
 }
 
@@ -56,7 +58,7 @@ build() {
     mkdir -p unpack
     # tar accepts "axf" option now which use whatever the decompressor requires
     for f in cache/*.tar.*; do
-	tar -axf "$f" -C "${srcdir}/unpack"
+        tar -axf "$f" -C "${srcdir}/unpack"
     done
 
     # # clone dictionaries because mingw only has en dictionaries

@@ -22,6 +22,7 @@ renamed to match `language_territory` locale names, like `uk_UA` or `en_GB`.
 - [Git Windows](https://git-scm.com/download/win)
 - [Imagemagick](https://imagemagick.org/) for `org-download-clipboard` to work
 - [MikTek](https://miktex.org/) for `org-latex-preview`
+- [Python](https://www.python.org/downloads/windows/) for `pylsp`
 
 ## Usage
 
@@ -42,10 +43,22 @@ The resulting .tar.zst (~100MB) should be in current directory
 ### On Starting Emacs Server
 I use this [script](./StartEmacs.bat) to start the Emacs server, it boils down to `emacsclientw.exe -n -c -a ""` to start a server, then later you can use `emacsclientw.exe -create-frame` to start a frame.
 
+#### Notes
+1. setup the `TMP` and `TEMP` variable
+
+Windows somehow gives you **ill-formed**
+temporary path (some kind of abbreviation that I am sure), which makes
+`temporary-file-directory` variable **ill-formed** in Emacs, which I use to
+configure the `org-preview-latex-image-directory`. The `dvipng` never
+gets the output `tex` path correctly because of it.
+
+
 ## Result artifacts
 
 Once you have the zip you can extract it some where (eg C:/Softwares/emacs-bin)
 then adding bin folder to the PATH
+
+
 
 ## License
 

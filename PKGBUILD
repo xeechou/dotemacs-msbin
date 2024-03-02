@@ -3,7 +3,7 @@
 _realname=dotemacs-bin
 pkgbase=mingw-w64-${_realname}
 pkgname=("${_realname}")
-pkgver=v0.2.2
+pkgver=v0.2.3
 pkgrel=3
 pkgdesc="Binaries dependencies for Emacs on Windows"
 arch=('any')

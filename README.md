@@ -23,6 +23,7 @@ renamed to match `language_territory` locale names, like `uk_UA` or `en_GB`.
 - [Imagemagick](https://imagemagick.org/) for `org-download-clipboard` to work
 - [MikTek](https://miktex.org/) for `org-latex-preview`
 - [Python](https://www.python.org/downloads/windows/) for `pylsp`
+- [Ollama](https://ollama.com/) for `ellama` llm usage
 
 ## Usage
 

@@ -1,6 +1,10 @@
 name: Emacs binaries build
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -12,38 +16,58 @@ jobs:
       - uses: actions/checkout@v4
       - uses: msys2/setup-msys2@v2
         with:
-          msystem: MINGW64
+          msystem: UCRT64
           update: true
           install: git zip patch tar bsdtar make curl unzip zstd
+      - name: Install external dependencies
+        shell: pwsh
+        run: .\install-deps.ps1
       - name: CI-build
         run: |
           pacman -S --noconfirm base-devel pacman-contrib coreutils
-          pacman -S --noconfirm mingw-w64-x86_64-toolchain
-          pacman -S --noconfirm mingw-w64-x86_64-hunspell 
-          pacman -S --noconfirm mingw-w64-x86_64-ripgrep
-          pacman -S --noconfirm mingw-w64-x86_64-curl
-          pacman -S --noconfirm mingw-w64-x86_64-ninja
-          pacman -S --noconfirm mingw-w64-x86_64-sqlite3
-          pacman -S --noconfirm mingw-w64-x86_64-diffutils
-          pacman -S --noconfirm mingw-w64-x86_64-binutils          
+          pacman -S --noconfirm mingw-w64-ucrt-x86_64-toolchain
+          pacman -S --noconfirm mingw-w64-ucrt-x86_64-hunspell
+          pacman -S --noconfirm mingw-w64-ucrt-x86_64-ripgrep
+          pacman -S --noconfirm mingw-w64-ucrt-x86_64-curl
+          pacman -S --noconfirm mingw-w64-ucrt-x86_64-ninja
+          pacman -S --noconfirm mingw-w64-ucrt-x86_64-sqlite3
+          pacman -S --noconfirm mingw-w64-ucrt-x86_64-diffutils
+          pacman -S --noconfirm mingw-w64-ucrt-x86_64-binutils
+          pacman -S --noconfirm mingw-w64-ucrt-x86_64-imagemagick
           echo "Tag name from github.ref_name ${{  github.ref_name }}"
           makepkg-mingw -f -s
-      # - name: Create Release
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: ${{ github.ref }}
-      #     release_name: Release ${{ github.ref }}
-      #     draft: false
-      #     prerelease: false
-      # - name: upload windows artifacts
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }} # pull
-      #     asset_path: _out/dotemacs-msbin.zip
-      #     asset_name: dotemacs-msbin.zip
-      #     asset_content_type: application/zip
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dotemacs-msbin-pkg
+          path: dotemacs-bin-*-any.pkg.tar.zst
+          retention-days: 90
+
+  release:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dotemacs-msbin-pkg
+          path: artifacts
+
+      - name: Create release tag
+        id: tag
+        run: echo "tag=dotemacs-msbin-$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: "dotemacs-msbin ${{ steps.tag.outputs.tag }}"
+          body: |
+            Automated build from commit ${{ github.sha }}.
+
+            Contains pre-built MSYS2/UCRT64 binary dependencies for Emacs on Windows.
+          files: artifacts/*.tar.zst
+          generate_release_notes: false

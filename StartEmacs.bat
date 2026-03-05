@@ -15,7 +15,6 @@ set no_proxy=localhost,127.0.0.1,192.168.1.1
 
 rem set PATH and MANPATH
 set PATH=C:\Softwares\Emacs\emacs-29.1\bin;C:\Softwares\DotEmacs\mingw64\bin;C:\Softwares\DotEmacs\usr\bin;
-set PATH=%PATH%C:\Softwares\ImageMagick-7.1.1-Q16-HDRI;
 set PATH=%PATH%C:\Python312;C:\Python312\Scripts;
 set PATH=%PATH%C:\Softwares\MiKTeX\miktex\bin\x64;
 set PATH=%PATH%C:\Softwares\flutter\bin;

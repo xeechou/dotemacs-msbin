@@ -14,8 +14,7 @@ set no_proxy=localhost,127.0.0.1,192.168.1.1
 
 
 rem set PATH and MANPATH
-set PATH=C:\Softwares\Emacs\emacs-29.1\bin;C:\Softwares\DotEmacs\mingw64\bin;C:\Softwares\DotEmacs\usr\bin;
-set PATH=%PATH%C:\Softwares\ImageMagick-7.1.1-Q16-HDRI;
+set PATH=C:\Softwares\Emacs\emacs-29.1\bin;C:\Softwares\DotEmacs\ucrt64\bin;C:\Softwares\DotEmacs\usr\bin;
 set PATH=%PATH%C:\Python312;C:\Python312\Scripts;
 set PATH=%PATH%C:\Softwares\MiKTeX\miktex\bin\x64;
 set PATH=%PATH%C:\Softwares\flutter\bin;
@@ -23,7 +22,7 @@ set PATH=%PATH%C:\Softwares\nodejs;
 set PATH=%PATH%C:\Softwares\Git\mingw64\bin;C:\Softwares\LLVM\bin;C:\Softwares\CMake\bin;C:\Softwares\VulkanSDK\1.3.275.0\Bin;
 set PATH=%PATH%C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\OpenSSH;C:\Windows\System32\WindowsPowerShell\v1.0;
 set PATH=%PATH%%USERPROFILE%\AppData\Local\Programs\Ollama;
-set MANPATH=C:\Softwares\DotEmacs\mingw64\share\man;C:\Softwares\DotEmacs\usr\share\man
+set MANPATH=C:\Softwares\DotEmacs\ucrt64\share\man;C:\Softwares\DotEmacs\usr\share\man
 
 rem RUST variables
 set PATH=%PATH%%HOME%\.cargo\bin;

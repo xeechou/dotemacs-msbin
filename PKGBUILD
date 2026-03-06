@@ -18,6 +18,9 @@ depends=("${MINGW_PACKAGE_PREFIX}-hunspell"
          "${MINGW_PACKAGE_PREFIX}-curl"
          "${MINGW_PACKAGE_PREFIX}-diffutils"
          "${MINGW_PACKAGE_PREFIX}-imagemagick"
+         "${MINGW_PACKAGE_PREFIX}-python"
+         "${MINGW_PACKAGE_PREFIX}-basedpyright"
+         "${MINGW_PACKAGE_PREFIX}-python-lsp-ruff"
          "coreutils" #for printf
          "${MINGW_PACKAGE_PREFIX}-binutils"  #for objdump, nm, c++filt
          # "${MINGW_PACKAGE_PREFIX}-texlive-bin" too much more bloated

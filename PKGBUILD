@@ -3,8 +3,8 @@
 _realname=dotemacs-bin
 pkgbase=mingw-w64-${_realname}
 pkgname=("${_realname}")
-pkgver=v0.2.3
-pkgrel=4
+pkgver=v0.2.4
+pkgrel=1
 pkgdesc="Binaries dependencies for Emacs on Windows"
 arch=('any')
 mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64' 'clang32' 'clangarm64')

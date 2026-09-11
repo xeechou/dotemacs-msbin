@@ -12,26 +12,29 @@ options=(!strip)
 url='https://github.com/xeechou/dotemacs-msbin'
 license=('MIT')
 depends=("${MINGW_PACKAGE_PREFIX}-hunspell"
-         "${MINGW_PACKAGE_PREFIX}-ripgrep"
-         "${MINGW_PACKAGE_PREFIX}-sqlite3"
-         "${MINGW_PACKAGE_PREFIX}-ninja"
-         "${MINGW_PACKAGE_PREFIX}-curl"
-         "${MINGW_PACKAGE_PREFIX}-diffutils"
-         "${MINGW_PACKAGE_PREFIX}-imagemagick"
-         "${MINGW_PACKAGE_PREFIX}-python"
-         "${MINGW_PACKAGE_PREFIX}-basedpyright"
-         "${MINGW_PACKAGE_PREFIX}-python-lsp-ruff"
-         "coreutils" #for printf
-         "${MINGW_PACKAGE_PREFIX}-binutils"  #for objdump, nm, c++filt
-         # "${MINGW_PACKAGE_PREFIX}-texlive-bin" too much more bloated
-         # "${MINGW_PACKAGE_PREFIX}-texlive-plain-generic"
-         # "${MINGW_PACKAGE_PREFIX}-texlive-latex-recommended"
-        )
+	 "${MINGW_PACKAGE_PREFIX}-ripgrep"
+	 "${MINGW_PACKAGE_PREFIX}-sqlite3"
+	 "${MINGW_PACKAGE_PREFIX}-ninja"
+	 "${MINGW_PACKAGE_PREFIX}-curl"
+	 "${MINGW_PACKAGE_PREFIX}-diffutils"
+	 "${MINGW_PACKAGE_PREFIX}-imagemagick"
+	 "${MINGW_PACKAGE_PREFIX}-python"
+	 # basedpyright dropped: it is the only package in the closure that pulls
+	 # in nodejs (~52MB of lib/node_modules plus node.exe), and the bare/.exe
+	 # wrapper pairs it ships trip the MSYS .exe name magic in package().
+	 # python-lsp-ruff is a pylsp plugin and needs no node.
+	 # "${MINGW_PACKAGE_PREFIX}-basedpyright"
+	 "${MINGW_PACKAGE_PREFIX}-python-lsp-ruff"
+	 "coreutils" #for printf
+	 "${MINGW_PACKAGE_PREFIX}-binutils"  #for objdump, nm, c++filt
+	 # "${MINGW_PACKAGE_PREFIX}-texlive-bin" too much more bloated
+	 # "${MINGW_PACKAGE_PREFIX}-texlive-plain-generic"
+	 # "${MINGW_PACKAGE_PREFIX}-texlive-latex-recommended"
+	)
 makedepends=("wget" "pacman-contrib" "curl" "git")
 source=("dict.sh" "dict.txt")
 sha256sums=('SKIP' 'SKIP')
-# dictref="9ec31e4"
-dictref="libreoffice-7.6.0.2"
+dictref="libreoffice-26.2.6.3"
 
 pkg_download() {
     mkdir -p "$2"
@@ -116,15 +119,15 @@ prepare() {
     # get the dependencies: "xargs -n 1" will execute the command once per
     # parameter, "pacman -Sp" will generate the default URL to download
     echo "${depends[@]}" | xargs -n 1 pactree -u | \
-        sort -u | \
-        xargs -n 1 pacman -Sp > _packages.list
+	sort -u | \
+	xargs -n 1 pacman -Sp > _packages.list
     echo "Prepare: packages to download:"
     cat _packages.list
 
     # Download packages under the cache
     packages=$(cat _packages.list)
     for url in ${packages}; do
-        pkg_download "$url" "${srcdir}/cache"
+	pkg_download "$url" "${srcdir}/cache"
     done
 }
 
@@ -133,14 +136,14 @@ build() {
     mkdir -p unpack
     # tar accepts "axf" option now which use whatever the decompressor requires
     for f in cache/*.tar.*; do
-        tar -axf "$f" -C "${srcdir}/unpack"
+	tar -axf "$f" -C "${srcdir}/unpack"
     done
 
     # # clone dictionaries because mingw only has en dictionaries
     cd "${srcdir}"
     rm -rf dict #clearing out the dictionary
-    git clone -b ${dictref} https://anongit.freedesktop.org/git/libreoffice/dictionaries.git dict
-    # cd dict && git checkout ${dictref} && patch -p1 < ../001-en_US.patch
+    # either https://git.libreoffice.org/dictionaries or github
+    git clone -b ${dictref} https://github.com/LibreOffice/dictionaries.git dict
     cd "${srcdir}" # now copy the dictionaries
     ./dict.sh dict "${srcdir}/unpack/$(basename ${MINGW_PREFIX})/share/hunspell"
 

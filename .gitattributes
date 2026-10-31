@@ -1,2 +1,4 @@
 # Set the default behavior
 * text eol=lf
+# cmd.exe misparses LF-only batch files (labels, multi-line if blocks)
+*.bat text eol=crlf

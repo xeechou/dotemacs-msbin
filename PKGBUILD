@@ -3,7 +3,7 @@
 _realname=dotemacs-bin
 pkgbase=mingw-w64-${_realname}
 pkgname=("${_realname}")
-pkgver=v0.2.4
+pkgver=v0.3.0
 pkgrel=1
 pkgdesc="Binaries dependencies for Emacs on Windows"
 arch=('any')
@@ -27,6 +27,9 @@ depends=("${MINGW_PACKAGE_PREFIX}-hunspell"
 	 "${MINGW_PACKAGE_PREFIX}-python-lsp-ruff"
 	 "coreutils" #for printf
 	 "${MINGW_PACKAGE_PREFIX}-binutils"  #for objdump, nm, c++filt
+	 # native-comp JIT: libgccjit is useless on its own, it spawns the gcc
+	 # driver to assemble and link every .eln.
+	 "${MINGW_PACKAGE_PREFIX}-libgccjit"
 	 # "${MINGW_PACKAGE_PREFIX}-texlive-bin" too much more bloated
 	 # "${MINGW_PACKAGE_PREFIX}-texlive-plain-generic"
 	 # "${MINGW_PACKAGE_PREFIX}-texlive-latex-recommended"
